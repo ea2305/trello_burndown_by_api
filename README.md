@@ -16,7 +16,7 @@ Where:
 
 ### Setup
 
-In order to use Trello API, you will need to generate some credentials. you can get those [here]("https://developers.trello.com/v1.0/reference#api-key-tokens")
+In order to use Trello API, you will need to generate some credentials. you can get those here: https://developers.trello.com/v1.0/reference#api-key-tokens
 
 After that, you need to pass the API KEY and API TOKEN as a Node enviroment variable
 example: 

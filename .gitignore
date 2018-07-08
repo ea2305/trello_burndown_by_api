@@ -1,5 +1,6 @@
 # resources
 auth.json
+package-lock.json
 
 # modules
 node_modules

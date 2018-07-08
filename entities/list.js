@@ -36,7 +36,7 @@ class List {
       let response = await axios.get(URL, { params })
       if (response.status === 200) {
         this.tasks = response.data.map(task => {
-          let currTask =  new Task(task.name, task.dateLastActivity)
+          let currTask = new Task(task.name, task.dateLastActivity, task.idMembers.pop())
           currTask.parseTask()
           return currTask
         }) 

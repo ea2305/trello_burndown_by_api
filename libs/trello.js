@@ -20,22 +20,7 @@ class Trello {
    */
   constructor (organization = '') {
     this.organization = organization
-  }
-
-  /**
-   * Set Trello Api key
-   * @param {String} apiKey
-   */
-  setApiKey (apiKey) {
-    this.apiKey = apiKey
-  }
-
-  /**
-   * Set Trello token
-   * @param {String} token
-   */
-  setApiKey (token) {
-    this.token = token
+    this.boards = []
   }
 
   /**
@@ -57,13 +42,54 @@ class Trello {
       const params = { token: auth.token, key: auth.apiKey }
       let response = await axios.get(URL, { params })
       if (response.status === 200) {
-        return response.data.map(board => {
-          return new Board(board.id, board.name, board.desc, board.dateLastActivity)
-        }) 
+        this.boards = await Promise.all(response.data.map(async board => {
+          let currBoard = new Board(board.id, board.name, board.desc, board.dateLastActivity)
+          await currBoard.fill()
+          return currBoard
+        }))
+        return this.boards
       }
     } catch (error) {
       console.log(error)
     }
+  }
+
+  /**
+   * Sprints report
+   * @returns {Array}
+   */
+  async sprintReport () {
+    let report = []
+    for (let index = 0; index < this.boards.length; index++) {
+      const board = this.boards[index]
+      const name = board.name.toUpperCase()
+      if (name.includes('SPRINT')) {
+        let curr =  await board.resume()
+        let res = {}
+        res[name] = curr
+        report.push(res)
+      }
+    }
+    return report
+  }
+
+  /**
+   * Sprints report
+   * @returns {Array}
+   */
+  async sprintReportByUser () {
+    let report = []
+    for (let index = 0; index < this.boards.length; index++) {
+      const board = this.boards[index]
+      const name = board.name.toUpperCase()
+      if (name.includes('SPRINT')) {
+        let curr =  await board.resumeByUser()
+        let res = {}
+        res[name] = curr
+        report.push(res)
+      }
+    }
+    return report
   }
 }
 

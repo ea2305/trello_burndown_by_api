@@ -36,7 +36,7 @@ class Board {
     await this.getLists()
     // Cards
     await this.getAllCards()
-
+    // users
     await this.getUsers()
   }
 
@@ -78,7 +78,7 @@ class Board {
       let response = await axios.get(URL, { params })
       if (response.status === 200) {
         this.allCards = response.data.map(task => {
-          let currTask = new Task(task.name, task.dateLastActivity)
+          let currTask = new Task(task.name, task.dateLastActivity, task.idMembers.pop())
           // parse fields
           currTask.parseTask()
           this.totalEPoints += currTask.estimationPoints
@@ -113,6 +113,9 @@ class Board {
     }
   }
 
+  /**
+   * Burndown char plotable info
+   */
   async boardBurnDownData () {
     if (this.allCards.length <= 0) {
       await this.getAllCards()
@@ -153,6 +156,46 @@ class Board {
         total += arr[i][prop]
     }
     return total
+  }
+
+  /**
+   * Global resume
+   */
+  async resume () {
+    // get all cards
+    if (this.allCards.length <= 0) {
+      await this.getAllCards()
+    }
+
+    return {
+      tasks: this.allCards.length,
+      estimationPoints: this.sum(this.allCards, 'estimationPoints'),
+      realPoints: this.sum(this.allCards, 'realPoints'),
+      wished: 120
+    }
+  }
+
+  /**
+   * Resume by user
+   * @param {User} user
+   */
+  async resumeByUser() {
+    // get all cards
+    if (this.allCards.length <= 0) {
+      await this.getAllCards()
+    }
+    
+    return this.users.map(user => {
+      let curr = this.allCards.filter(card => card.userID === user.id)
+      let response = {}
+      response[user.fullName] = {
+        tasks: curr.length,
+        estimationPoints: this.sum(curr, 'estimationPoints'),
+        realPoints: this.sum(curr, 'realPoints'),
+        wished: 40
+      }
+      return response
+    })
   }
 }
 

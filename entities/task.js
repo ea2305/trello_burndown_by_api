@@ -14,8 +14,9 @@ class Task {
    * @param {Number} estimationPoints
    * @param {Number} realPoints
    */
-  constructor (raw = '', updated_at = '', title = '',history = 'none', estimationPoints = 0, realPoints = 0) {
+  constructor (raw = '', updated_at = '', userID = '', title = '',history = 'none', estimationPoints = 0, realPoints = 0) {
     this.raw = raw
+    this.userID = userID
     this.updated_at = moment(updated_at).format('YYYY-MM-DD')
     this.title = title
     this.history = history

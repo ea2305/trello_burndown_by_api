@@ -19,8 +19,6 @@ class Trello {
    * @param {String} token
    */
   constructor (organization = '') {
-    this.apiKey = auth.apiKey
-    this.token = auth.token
     this.organization = organization
   }
 
@@ -56,7 +54,7 @@ class Trello {
     if (this.organization === '') return []
     try {
       const URL = `https://api.trello.com/1/organizations/${this.organization}/boards`
-      const params = { token: this.token, key: this.apiKey }
+      const params = { token: auth.token, key: auth.apiKey }
       let response = await axios.get(URL, { params })
       if (response.status === 200) {
         return response.data.map(board => {

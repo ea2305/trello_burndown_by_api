@@ -18,14 +18,18 @@ const Board = require('./entities/board.js')
 let parser = new CardParser()
 let trello = new Trello('switchtecnologias')
 
-let task = new Task()
-let board = new Board(12, 'ok', 'ok desc')
-
-task.setRawData('<pepe>()hola[2313]')
-
-async function a () {
+async function test () {
   let boards = await trello.getBoards()
-  console.log(boards, 'Hola')
+  // console.log(boards, 'Hola')
+
+  await boards[2].fill()
+  let res = await boards[2].boardBurnDownData()
+  console.log(res)
 }
 
-a()
+test()
+/**
+ * let task = new Task('<HOLA> pepepe (.5)[.5]')
+task.parseTask()
+console.log(task)
+ */

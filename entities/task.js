@@ -4,6 +4,8 @@
  * @version 0.1.2
  */
 
+const moment = require('moment')
+
 class Task {
   /**
    * Base structure
@@ -14,11 +16,13 @@ class Task {
    */
   constructor (raw = '', updated_at = '', title = '',history = 'none', estimationPoints = 0, realPoints = 0) {
     this.raw = raw
-    this.updated_at = updated_at
+    this.updated_at = moment(updated_at).format('YYYY-MM-DD')
     this.title = title
     this.history = history
     this.estimationPoints = estimationPoints
     this.realPoints = realPoints
+    // ignnitor
+    // this.parseTask()
   }
 
   /**
@@ -35,7 +39,7 @@ class Task {
    * Service tag validation
    */
   validation () {
-    const regx = /\<[a-zA-Z]*\>\([-+]?[0-9]*\.?[0-9]*\)[\sa-zA-Z0-9]+\[[-+]?[0-9]*\.?[0-9]*\]|\([-+]?[0-9]*\.?[0-9]*\)[\sa-zA-Z0-9]+/g
+    const regx = /\<[a-zA-Z0-9]*\>.*\([-+]?[0-9]*\.?[0-9]*\).*\[[-+]?[0-9]*\.?[0-9]*\]|\<[a-zA-Z0-9]*\>.*\([-+]?[0-9]*\.?[0-9]*\)/g
     return (regx.exec(this.raw) != null)
   }
 

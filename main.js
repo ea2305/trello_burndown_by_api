@@ -9,8 +9,11 @@
 
 // const setup = require('../setup/test.json')
 const axios = require('axios')
-const Board = require('../entities/board')
-const auth = require('../setup/auth')
+const Board = require('./src/board')
+const auth = {
+  apiKey: process.env.TRELLO_KEY,
+  token: process.env.TRELLO_TOKEN,
+}
 
 class Trello {
   /**

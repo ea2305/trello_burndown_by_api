@@ -7,9 +7,12 @@
  // libs
 const axios = require('axios')
 
-const Task = require('../entities/task')
-const User = require('../entities/user')
-const auth = require('../setup/auth')
+const Task = require('../src/task')
+const User = require('../src/user')
+const auth = {
+  apiKey: process.env.TRELLO_KEY,
+  token: process.env.TRELLO_TOKEN,
+}
 
 class List {
   /**

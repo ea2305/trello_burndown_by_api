@@ -1,16 +1,7 @@
-// Get data
-  // setup elements
-    // *> boards
-  // make request
-  // get data and store
-// Parse into entities
-  // Boards * 
-  // Tasks * 
-  // Users * (is user subscribed in your team?)
-// Make Burndown data
+// Requires trello config
+const Trello = require('./main.js')
 
-const Trello = require('./libs/trello.js')
-
+// initialize
 let trello = new Trello('switchtecnologias')
 
 async function test () {

@@ -1,12 +1,12 @@
 {
-  "name": "trello_burndown",
+  "name": "trello_api_burndown_parse",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "node main.js"
+    "test": "ENV TRELLO_KEY=**** TRELLO_TOKEN=**** node example.js"
   },
-  "keywords": [],
+  "keywords": ["trello", "burndown", "API"],
   "author": "Elihu A. Cruz",
   "license": "MIT",
   "dependencies": {

@@ -8,10 +8,13 @@
 const axios = require('axios')
 
 // Models & setup
-const List = require('../entities/list')
-const Task = require('../entities/task')
-const User = require('../entities/user')
-const auth = require('../setup/auth')
+const List = require('../src/list')
+const Task = require('../src/task')
+const User = require('../src/user')
+const auth = {
+  apiKey: process.env.TRELLO_KEY,
+  token: process.env.TRELLO_TOKEN,
+}
 
 class Board {
   /**

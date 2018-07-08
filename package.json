@@ -1,0 +1,16 @@
+{
+  "name": "trello_burndown",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "keywords": [],
+  "author": "Elihu A. Cruz",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "0.18.0",
+    "moment": "2.22.2"
+  }
+}

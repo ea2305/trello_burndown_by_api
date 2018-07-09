@@ -43,7 +43,7 @@ class List {
           currTask.parseTask()
           return currTask
         }) 
-        return this.tasks
+        return this.tasks.slice()
       }
     } catch (error) {
       console.log(error)

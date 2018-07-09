@@ -58,7 +58,7 @@ class Board {
         this.lists = response.data.map(list => {
           return new List(list.id, list.name)
         }) 
-        return this.lists
+        return this.lists.slice()
       }
     } catch (error) {
       console.log(error)
@@ -87,7 +87,7 @@ class Board {
           this.totalEPoints += currTask.estimationPoints
           return currTask
         }) 
-        return this.allCards
+        return this.allCards.slice()
       }
     } catch (error) {
       console.log(error)
@@ -109,7 +109,7 @@ class Board {
         this.users = response.data.map(user => {
           return new User(user.id, user.fullName)
         }) 
-        return this.users
+        return this.users.slice()
       }
     } catch (error) {
       console.log(error)
@@ -142,7 +142,7 @@ class Board {
           burndown.push(column)
         }
       }
-      return burndown 
+      return burndown.slice()
     } else {
       return []
     }

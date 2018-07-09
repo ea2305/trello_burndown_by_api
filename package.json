@@ -1,6 +1,6 @@
 {
   "name": "trello_api_burndown_parse",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "",
   "main": "main.js",
   "repository": "/ea2305/trello_burndown_by_api",

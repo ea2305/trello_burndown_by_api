@@ -9,9 +9,9 @@ async function test () {
   // console.log(boards, 'Hola')
   // let res = await boards[2].boardBurnDownData()
   //let res = await boards[2].resumeByUser()
-  // console.log(await trello.sprintReport())
+  console.log(await trello.sprintReport())
   // console.log(await trello.sprintReportByUser())
-  console.log(await trello.getUserTeam())
+  // console.log(await trello.getUserTeam())
 }
 
 test()

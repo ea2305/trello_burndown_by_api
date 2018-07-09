@@ -10,6 +10,8 @@
 // const setup = require('../setup/test.json')
 const axios = require('axios')
 const Board = require('./src/board')
+const User = require('./src/user')
+
 const auth = {
   apiKey: process.env.TRELLO_KEY,
   token: process.env.TRELLO_TOKEN,
@@ -24,6 +26,7 @@ class Trello {
   constructor (organization = '') {
     this.organization = organization
     this.boards = []
+    this.members = []
   }
 
   /**
@@ -93,6 +96,25 @@ class Trello {
       }
     }
     return report
+  }
+
+  /**
+   * Get users
+   */
+  async getUserTeam () {
+    try {
+      const URL = `https://api.trello.com/1/organizations/${this.organization}/members`
+      const params = { token: auth.token, key: auth.apiKey }
+      let response = await axios.get(URL, { params })
+      if (response.status === 200) {
+        this.members = response.data.map(user => {
+          return new User(user.id, user.fullName)
+        })
+        return this.members
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
